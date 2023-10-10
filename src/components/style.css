@@ -1,0 +1,37 @@
+body {
+  background: #f5f5dc;
+}
+form {
+  display: flex;
+  justify-content: center;
+}
+form > input {
+  width: 800px;
+  font-size: 17px;
+  padding: 5px;
+  font-family: sans-serif;
+}
+.add_button {
+  background: #055431;
+  color: white;
+  width: 70px;
+  cursor: pointer;
+  border: none;
+}
+.holder {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  font-family: sans-serif;
+}
+.holder > * {
+  width: 380px;
+  border: 1px solid green;
+  margin: 10px;
+  background: rgb(230, 248, 230);
+  font-size: 17px;
+}
+h3 {
+  font-family: sans-serif;
+  text-align: center;
+}
