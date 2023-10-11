@@ -13,6 +13,9 @@ export default function Student() {
   const [editmode, setEditmode] = useState(false);
   const [editableNote, setEditableNote] = useState(null);
   // Delete State
+  // present absent student state
+  const [presentList, setPresentlist] = useState([]);
+  const [absenseList, setAbsenseList] = useState([]);
 
   // create student start
   const submitHandler = (e) => {
@@ -58,6 +61,27 @@ export default function Student() {
     const newARr = list.filter((item) => item.id !== name);
     setList(newARr);
   };
+  //delete student end
+  //make present student start
+
+  const makePresent = (data) => {
+    const presentData = {
+      id: Math.random(),
+      studName: data.listName,
+    };
+    setPresentlist([...presentList, presentData]);
+  };
+  // make present student end
+  // make absense student start
+  const makeAbsence = (data) => {
+    const absenseData = {
+      id: Math.random(),
+      studName: data.listName,
+    };
+    setAbsenseList([...absenseList, absenseData]);
+  };
+  // makeAbsence student end
+
   return (
     <div className="main">
       <div className="add_student">
@@ -74,28 +98,35 @@ export default function Student() {
         </form>
       </div>
       <div className="holder">
-        <div className="present_list">
-          <h3> Present Student</h3>
+        <div className="student_list">
+          <h3>Student List </h3>
           <ol>
             {list.map((item) => (
               <li key={item.id}>
-                {" "}
-                {item.listName}{" "}
-                <button onClick={(event) => editHandler(item)}>Edit</button>
-                <button onClick={(event) => deleteHandler(item.id)}>
-                  Delete
-                </button>
+                {item.listName}
+                <button onClick={() => editHandler(item)}>Edit</button>
+                <button onClick={() => deleteHandler(item.id)}>Remove</button>
+                <button onClick={() => makePresent(item)}>Present</button>
+                <button onClick={() => makeAbsence(item)}>Absense</button>
               </li>
             ))}
           </ol>
         </div>
-        <div className="absentlist">
-          <h3> Absense Student Student</h3>
-          <ul>
-            {/* <li> jsdklfjdsfdjf</li>
-            <li> jsdklfjdsfdjf</li>
-            <li> jsdklfjdsfdjf</li> */}
-          </ul>
+        <div className="present_list">
+          <h3> Present List</h3>
+          <ol>
+            {presentList.map((item) => (
+              <li key={item.id}>{item.studName}</li>
+            ))}
+          </ol>
+        </div>
+        <div className="absent_list">
+          <h3> Absense List</h3>
+          <ol>
+            {absenseList.map((item) => (
+              <li key={item.id}> {item.studName}</li>
+            ))}
+          </ol>
         </div>
       </div>
     </div>
