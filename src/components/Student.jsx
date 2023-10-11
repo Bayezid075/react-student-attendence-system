@@ -12,6 +12,8 @@ export default function Student() {
   // edit state
   const [editmode, setEditmode] = useState(false);
   const [editableNote, setEditableNote] = useState(null);
+  // Delete State
+
   // create student start
   const submitHandler = (e) => {
     e.preventDefault();
@@ -51,6 +53,11 @@ export default function Student() {
     setName("");
   };
   // edit student end
+  // delete student start
+  const deleteHandler = (name) => {
+    const newARr = list.filter((item) => item.id !== name);
+    setList(newARr);
+  };
   return (
     <div className="main">
       <div className="add_student">
@@ -75,6 +82,9 @@ export default function Student() {
                 {" "}
                 {item.listName}{" "}
                 <button onClick={(event) => editHandler(item)}>Edit</button>
+                <button onClick={(event) => deleteHandler(item.id)}>
+                  Delete
+                </button>
               </li>
             ))}
           </ol>
