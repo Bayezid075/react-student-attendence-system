@@ -6,9 +6,9 @@ export default function Student() {
   // create state
   const [name, setName] = useState("");
   const [list, setList] = useState([
-    { id: Math.random(), listName: "Bayezid Hoshen" },
+    { id: Math.random(), listName: "Bayezid Hoshen", isPresent: undefined },
   ]);
-
+  console.log(list);
   // edit state
   const [editmode, setEditmode] = useState(false);
   const [editableNote, setEditableNote] = useState(null);
@@ -68,7 +68,9 @@ export default function Student() {
     const presentData = {
       id: Math.random(),
       studName: data.listName,
+      isPresent: true,
     };
+
     setPresentlist([...presentList, presentData]);
   };
   // make present student end
@@ -77,11 +79,20 @@ export default function Student() {
     const absenseData = {
       id: Math.random(),
       studName: data.listName,
+      isPresent: false,
     };
     setAbsenseList([...absenseList, absenseData]);
   };
   // makeAbsence student end
-
+  // accidental delete start
+  const accidentalRemoveHandler1 = (ItemId) => {
+    const filtered = presentList.filter((name) => name.id !== ItemId);
+    setPresentlist(filtered);
+  };
+  const accidentalRemoveHandler2 = (ItemId) => {
+    const filtered = absenseList.filter((name) => name.id !== ItemId);
+    setAbsenseList(filtered);
+  };
   return (
     <div className="main">
       <div className="add_student">
@@ -116,7 +127,13 @@ export default function Student() {
           <h3> Present List</h3>
           <ol>
             {presentList.map((item) => (
-              <li key={item.id}>{item.studName}</li>
+              <li key={item.id}>
+                {item.studName}
+                <button onClick={() => accidentalRemoveHandler1(item.id)}>
+                  {" "}
+                  Accidentally Added
+                </button>
+              </li>
             ))}
           </ol>
         </div>
@@ -124,7 +141,14 @@ export default function Student() {
           <h3> Absense List</h3>
           <ol>
             {absenseList.map((item) => (
-              <li key={item.id}> {item.studName}</li>
+              <li key={item.id}>
+                {" "}
+                {item.studName}{" "}
+                <button onClick={() => accidentalRemoveHandler2(item.id)}>
+                  {" "}
+                  Accidentally Added
+                </button>{" "}
+              </li>
             ))}
           </ol>
         </div>
